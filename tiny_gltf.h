@@ -2768,24 +2768,24 @@ static bool ParseImage(Image *image, const int image_idx, std::string *err,
 #ifdef TINYGLTF_NO_EXTERNAL_IMAGE
     return true;
 #endif
-    if (!LoadExternalFile(&img, err, warn, uri, basedir, false, 0, false, fs)) {
-      if (warn) {
-        (*warn) += "Failed to load external 'uri' for image[" +
-                   std::to_string(image_idx) + "] name = [" + image->name +
-                   "]\n";
-      }
-      // If the image cannot be loaded, keep uri as image->uri.
-      return true;
-    }
-
-    if (img.empty()) {
-      if (warn) {
-        (*warn) += "Image data is empty for image[" +
-                   std::to_string(image_idx) + "] name = [" + image->name +
-                   "] \n";
-      }
-      return false;
-    }
+//    if (!LoadExternalFile(&img, err, warn, uri, basedir, false, 0, false, fs)) {
+//      if (warn) {
+//        (*warn) += "Failed to load external 'uri' for image[" +
+//                   std::to_string(image_idx) + "] name = [" + image->name +
+//                   "]\n";
+//      }
+//      // If the image cannot be loaded, keep uri as image->uri.
+//      return true;
+//    }
+//
+//    if (img.empty()) {
+//      if (warn) {
+//        (*warn) += "Image data is empty for image[" +
+//                   std::to_string(image_idx) + "] name = [" + image->name +
+//                   "] \n";
+//      }
+//      return false;
+//    }
   }
 
   if (*LoadImageData == nullptr) {
@@ -2794,7 +2794,7 @@ static bool ParseImage(Image *image, const int image_idx, std::string *err,
     }
     return false;
   }
-  return (*LoadImageData)(image, image_idx, err, warn, 0, 0, &img.at(0),
+  return (*LoadImageData)(image, image_idx, err, warn, 0, 0, nullptr,
                           static_cast<int>(img.size()), load_image_user_data);
 }
 
